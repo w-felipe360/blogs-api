@@ -9,9 +9,21 @@ const blogPostsModel = sequelize.define('BlogPost', {
   content: DataTypes.STRING,
   published: DataTypes.DATE,
   updated: DataTypes.DATE,
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+  }
 },{
   tableName: 'blog_posts',
+  underscored: true,
   timestamps: false,  
 });
+  blogPostsModel.associate = (models) => {
+    blogPostsModel.belongsTo(models.User, {
+      foreignKey: 'userId',
+      as: 'user'
+    })
+  }
 return blogPostsModel
 }
