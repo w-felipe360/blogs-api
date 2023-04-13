@@ -34,7 +34,6 @@ const getUserById = async (req, res) => {
   try { 
     const { authorization } = req.headers;
     validateToken(authorization);
-    // console.log(req.headers);
     const { id } = req.params;
     const user = await userService.findUserById(id);
     return res.status(200).json(user);
