@@ -1,4 +1,5 @@
 const userService = require('../services/users.service');
+const { validateToken } = require('../utils/auth');
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -28,4 +29,20 @@ const getAllUsers = async (req, res) => {
     return res.status(401).json({ message: err.message });
   }
 };
-module.exports = { login, createUser, getAllUsers };
+
+const getUserById = async (req, res) => {
+  try { 
+    const { authorization } = req.headers;
+    validateToken(authorization);
+    // console.log(req.headers);
+    const { id } = req.params;
+    const user = await userService.findUserById(id);
+    return res.status(200).json(user);
+  } catch (err) {
+  console.log(err);
+   if (err.status) return res.status(err.status).json({ message: err.message });
+    return res.status(500).json({ message: err });
+  }
+  };
+  
+module.exports = { login, createUser, getAllUsers, getUserById };

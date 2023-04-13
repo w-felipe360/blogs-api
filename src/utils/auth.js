@@ -6,12 +6,16 @@ const configJWT = { expiresIn: '5m', algorithm: 'HS256' };
 const generateToken = (payload) => jwt.sign(payload, secretKey, configJWT);
 
 const validateToken = (token) => {
-    if (!token) throw new Error('Token not found');
+    const error = new Error('Token not found');
+    error.status = 401;
+    if (!token) throw error;
     try {
       const isValid = jwt.verify(token, secretKey);
       return isValid;
     } catch (err) {
-      throw new Error('Expired or invalid token');
+        const error1 = new Error('Expired or invalid token');
+        error1.status = 401;
+      throw error1;
     }
   };
 

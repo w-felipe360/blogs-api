@@ -15,5 +15,6 @@ emailRegexMiddleware,
 usersController.createUser,
 );
 routers.get('/user', usersController.getAllUsers);
+routers.get('/user/:id', usersController.getUserById);
 
 module.exports = routers;
