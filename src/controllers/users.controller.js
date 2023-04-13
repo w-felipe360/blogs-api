@@ -19,4 +19,13 @@ const createUser = async (req, res) => {
   }
   };
    
-module.exports = { login, createUser };
+const getAllUsers = async (req, res) => {
+  try {
+    const { authorization } = req.headers;
+    const users = await userService.findAllUsers(authorization);
+    return res.status(200).json(users);
+  } catch (err) {
+    return res.status(401).json({ message: err.message });
+  }
+};
+module.exports = { login, createUser, getAllUsers };

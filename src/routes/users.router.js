@@ -14,5 +14,6 @@ passwordLengthMiddleware,
 emailRegexMiddleware, 
 usersController.createUser,
 );
+routers.get('/user', usersController.getAllUsers);
 
 module.exports = routers;
