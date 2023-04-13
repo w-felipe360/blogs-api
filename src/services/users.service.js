@@ -10,4 +10,13 @@ const token = generateToken(user.dataValues);
 return token;
 };
 
-module.exports = { checkUser };
+const createUser = async ({ displayName, email, password, image }) => {
+     const existingUser = await User.findOne({ where: { email } });
+     const error = new Error('User already registered');
+     if (existingUser) throw error;
+     const newUser = await User.create({ displayName, email, password, image });
+     const token = generateToken(newUser.dataValues);
+     return token;
+};
+
+module.exports = { checkUser, createUser };
