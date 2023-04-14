@@ -12,12 +12,12 @@ const categoriesModel = (sequelize, DataTypes) => {
     timestamps: false,
     underscored: true,
   });
-  categorie.associate = (models) => {
-    categorie.hasMany(models.BlogPost, {
-      foreignKey: 'categoryId',
-      as: 'blog_posts'
-    })
-  }
+  // categorie.associate = (models) => {
+  //   categorie.hasMany(models.BlogPost, {
+  //     foreignKey: 'categoryId',
+  //     as: 'blog_posts'
+  //   })
+  // }
   return categorie;
 }
 module.exports = categoriesModel 

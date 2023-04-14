@@ -5,6 +5,12 @@
  */
 module.exports = (sequelize, DataTypes) => {
 const blogPostsModel = sequelize.define('BlogPost', {
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+   },
   title: DataTypes.STRING,
   content: DataTypes.STRING,
   published: DataTypes.DATE,
